@@ -81,14 +81,17 @@
                                 <rect key="frame" x="0.0" y="619" width="375" height="29"/>
                                 <color key="backgroundColor" red="0.89411764705882346" green="0.9137254901960784" blue="0.99215686274509807" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <segments>
-                                    <segment title="Naples"/>
+                                    <segment title="Paris"/>
+                                    <segment title="London"/>
                                     <segment title="New York"/>
                                     <segment title="Chicago"/>
-                                    <segment title="Chatham"/>
-                                    <segment title="Bev. Hills"/>
+                                    <segment title="Stockholm"/>
                                 </segments>
+                                <connections>
+                                    <action selector="locationPicker:" destination="BYZ-38-t0r" eventType="valueChanged" id="JIs-zZ-Gfl"/>
+                                </connections>
                             </segmentedControl>
-                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="satellite" translatesAutoresizingMaskIntoConstraints="NO" id="fyD-bV-yWA">
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="fyD-bV-yWA">
                                 <rect key="frame" x="16" y="68" width="343" height="543"/>
                             </mapView>
                         </subviews>

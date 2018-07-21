@@ -1,25 +1,19 @@
-//
-//  ViewController.swift
-//  PizzaHistoryMap
-//
-//  Created by Steven Lipton on 7/18/17.
-//  Copyright © 2017 Steven Lipton. All rights reserved.
-//
-
 /* --- Coordinate information -----
             Lat,long                      
- Naples: 40.8367321,14.2468856
- New York: 40.7216294 , -73.995453
- Chicago: 41.892479 , -87.6267592          
- Chatham: 42.4056555,-82.1860369         
- Beverly Hills: 34.0674607,-118.3977309
+ The Louvre Museum In Paris
+ @48.8606105,2.3376447
  
- -->Challenges!!<----
- 208 S. Beverly Drive Beverly Hills CA:34.0647691,-118.3991328
- 2121 N. Clark St Chicago IL: 41.9206921,-87.6375361
+ The British Museum In London
+ @51.5194537,-0.1268876
  
- For region monitoring:
- latitude: 37.33454235, longitude: -122.03666775000001
+ The Metropolitan Museum Of Art In New York City
+ @40.7794366,-73.963244
+ 
+ The Art Institute of Chicago
+ @41.8796405,-87.6237068
+ 
+ The Vasa Museum In Stockholm
+ @59.3280132,18.0914612
  --- */
 
 
@@ -30,7 +24,7 @@ import MapKit
 class ViewController: UIViewController {
     
     //MARK: - Properties and outlets
-    
+    var coordinate2D = CLLocationCoordinate2DMake(48.8606105, 2.3376447)
     
     //MARK: Outlets
     @IBOutlet weak var changeMapType: UIButton!
@@ -54,8 +48,37 @@ class ViewController: UIViewController {
     }
 
     @IBAction func locationPicker(_ sender: UISegmentedControl) {
+        print("click")
+        let index = sender.selectedSegmentIndex
+        
+        switch index {
+        case 0:
+            // the louvre
+           coordinate2D = CLLocationCoordinate2DMake(48.8606105, 2.3376447)
+        case 1:
+            //  The British Museum In London
+            coordinate2D = CLLocationCoordinate2DMake(51.5194537, -0.1268876)
+        case 2:
+            //  The Metropolitan Museum Of Art In New York City
+            coordinate2D = CLLocationCoordinate2DMake(40.7794366, -73.963244)
+        case 3:
+            //  The Art Institute of Chicago
+            coordinate2D = CLLocationCoordinate2DMake(41.8796405, -87.6237068)
+        case 4:
+            //  The Vasa Museum In Stockholm
+            coordinate2D = CLLocationCoordinate2DMake(59.3280132, 18.0914612)
+        default:
+           coordinate2D = CLLocationCoordinate2DMake(48.8606105, 2.3376447)
+        }
+        print("\(coordinate2D)")
+        updateMapRegion(rangeSpan: 100)
     }
+    
     //MARK: - Instance Methods
+    func updateMapRegion(rangeSpan:CLLocationDistance) {
+        let region = MKCoordinateRegionMakeWithDistance(coordinate2D, rangeSpan, rangeSpan)
+        mapView.region = region
+    }
     
     //MARK: Map setup
     
@@ -72,7 +95,7 @@ class ViewController: UIViewController {
     //MARK: - Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        updateMapRegion(rangeSpan: 100)
     }
 
     override func didReceiveMemoryWarning() {
