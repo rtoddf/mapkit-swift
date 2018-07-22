@@ -27,6 +27,7 @@ class ViewController: UIViewController {
     var coordinate2D = CLLocationCoordinate2DMake(48.8606105, 2.3376447)
     var camera = MKMapCamera()
     var pitch = 0
+    var isOn = false
     
     //MARK: Outlets
     @IBOutlet weak var changeMapType: UIButton!
@@ -35,18 +36,35 @@ class ViewController: UIViewController {
     
     //MARK: - Actions
     @IBAction func changeMapType(_ sender: UIButton) {
-        
+        switch mapView.mapType {
+        case .standard:
+            mapView.mapType = .satellite
+        case .satellite:
+            mapView.mapType = .hybrid
+        case .hybrid:
+            mapView.mapType = .satelliteFlyover
+        case .satelliteFlyover:
+            mapView.mapType = .hybridFlyover
+        case .hybridFlyover:
+            mapView.mapType = .standard
+        default:
+            mapView.mapType = .standard
+        }
     }
     
     @IBAction func changePitch(_ sender: UIButton) {
-       pitch  = (pitch + 15) % 90
+        pitch  = (pitch + 15) % 90
         // degrees is option 0
         sender.setTitle("\(pitch)º", for: .normal)
         mapView.camera.pitch = CGFloat(pitch)
     }
     
     @IBAction func toggleMapFeatures(_ sender: UIButton) {
-        
+        isOn = !mapView.showsPointsOfInterest
+        mapView.showsPointsOfInterest = isOn
+        mapView.showsScale = isOn
+        mapView.showsCompass = isOn
+        mapView.showsTraffic = isOn
     }
     
     @IBAction func findHere(_ sender: UIButton) {
